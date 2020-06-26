@@ -87,20 +87,12 @@ def train(epoch):
             inputs, targets = inputs.cuda(), targets.cuda()
         optimizer.zero_grad()
         inputs, targets = Variable(inputs), Variable(targets)
-<<<<<<< HEAD
-        print(inputs.shape)
-=======
->>>>>>> 193b391672b50917ead7e63f509a19f651af5e18
         outputs = net(inputs)
         loss = criterion(outputs, targets)
         loss.backward()
         optimizer.step()
 
-<<<<<<< HEAD
-        train_loss += loss.data
-=======
         train_loss += loss.data[0]
->>>>>>> 193b391672b50917ead7e63f509a19f651af5e18
         _, predicted = torch.max(outputs.data, 1)
         total += targets.size(0)
         correct += predicted.eq(targets.data).cpu().sum()
@@ -121,11 +113,7 @@ def test(epoch):
         outputs = net(inputs)
         loss = criterion(outputs, targets)
 
-<<<<<<< HEAD
-        test_loss += loss.data
-=======
         test_loss += loss.data[0]
->>>>>>> 193b391672b50917ead7e63f509a19f651af5e18
         _, predicted = torch.max(outputs.data, 1)
         total += targets.size(0)
         correct += predicted.eq(targets.data).cpu().sum()
