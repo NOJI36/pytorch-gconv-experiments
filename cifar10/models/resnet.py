@@ -1,7 +1,5 @@
 '''ResNet in PyTorch.
-
 For Pre-activation ResNet, see 'preact_resnet.py'.
-
 Reference:
 [1] Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun
     Deep Residual Learning for Image Recognition. arXiv:1512.03385
@@ -19,25 +17,15 @@ class BasicBlock(nn.Module):
     def __init__(self, in_planes, planes, stride=1):
         super(BasicBlock, self).__init__()
         self.conv1 = P4MConvP4M(in_planes, planes, kernel_size=3, stride=stride, padding=1, bias=False)
-<<<<<<< HEAD
-        self.bn1 = nn.BatchNorm3d(planes)
-        self.conv2 = P4MConvP4M(planes, planes, kernel_size=3, stride=1, padding=1, bias=False)
-        self.bn2 = nn.BatchNorm3d(planes)
-=======
         self.bn1 = nn.BatchNorm2d(planes)
         self.conv2 = P4MConvP4M(planes, planes, kernel_size=3, stride=1, padding=1, bias=False)
         self.bn2 = nn.BatchNorm2d(planes)
->>>>>>> 193b391672b50917ead7e63f509a19f651af5e18
 
         self.shortcut = nn.Sequential()
         if stride != 1 or in_planes != self.expansion*planes:
             self.shortcut = nn.Sequential(
                 P4MConvP4M(in_planes, self.expansion*planes, kernel_size=1, stride=stride, bias=False),
-<<<<<<< HEAD
-                nn.BatchNorm3d(self.expansion*planes)
-=======
                 nn.BatchNorm2d(self.expansion*planes)
->>>>>>> 193b391672b50917ead7e63f509a19f651af5e18
             )
 
     def forward(self, x):
@@ -54,29 +42,17 @@ class Bottleneck(nn.Module):
     def __init__(self, in_planes, planes, stride=1):
         super(Bottleneck, self).__init__()
         self.conv1 = P4MConvP4M(in_planes, planes, kernel_size=1, bias=False)
-<<<<<<< HEAD
-        self.bn1 = nn.BatchNorm3d(planes)
-        self.conv2 = P4MConvP4M(planes, planes, kernel_size=3, stride=stride, padding=1, bias=False)
-        self.bn2 = nn.BatchNorm3d(planes)
-        self.conv3 = P4MConvP4M(planes, self.expansion*planes, kernel_size=1, bias=False)
-        self.bn3 = nn.BatchNorm3d(self.expansion*planes)
-=======
         self.bn1 = nn.BatchNorm2d(planes)
         self.conv2 = P4MConvP4M(planes, planes, kernel_size=3, stride=stride, padding=1, bias=False)
         self.bn2 = nn.BatchNorm2d(planes)
         self.conv3 = P4MConvP4M(planes, self.expansion*planes, kernel_size=1, bias=False)
         self.bn3 = nn.BatchNorm2d(self.expansion*planes)
->>>>>>> 193b391672b50917ead7e63f509a19f651af5e18
 
         self.shortcut = nn.Sequential()
         if stride != 1 or in_planes != self.expansion*planes:
             self.shortcut = nn.Sequential(
                 P4MConvP4M(in_planes, self.expansion*planes, kernel_size=1, stride=stride, bias=False),
-<<<<<<< HEAD
-                nn.BatchNorm3d(self.expansion*planes)
-=======
                 nn.BatchNorm2d(self.expansion*planes)
->>>>>>> 193b391672b50917ead7e63f509a19f651af5e18
             )
 
     def forward(self, x):
@@ -94,11 +70,7 @@ class ResNet(nn.Module):
         self.in_planes = 23
 
         self.conv1 = P4MConvZ2(3, 23, kernel_size=3, stride=1, padding=1, bias=False)
-<<<<<<< HEAD
-        self.bn1 = nn.BatchNorm3d(23)
-=======
         self.bn1 = nn.BatchNorm2d(23)
->>>>>>> 193b391672b50917ead7e63f509a19f651af5e18
         self.layer1 = self._make_layer(block, 23, num_blocks[0], stride=1)
         self.layer2 = self._make_layer(block, 45, num_blocks[1], stride=2)
         self.layer3 = self._make_layer(block, 91, num_blocks[2], stride=2)
