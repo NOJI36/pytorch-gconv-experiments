@@ -65,9 +65,13 @@ class Net(nn.Module):
     def forward(self, x):
         x = F.relu(self.conv1(x))
         x = F.relu(self.conv2(x))
+<<<<<<< HEAD
         print('1) ', x.shape)
         x = plane_group_spatial_max_pooling(x, 2, 2)
         print('2) ', x.shape)
+=======
+        x = plane_group_spatial_max_pooling(x, 2, 2)
+>>>>>>> 193b391672b50917ead7e63f509a19f651af5e18
         x = F.relu(self.conv3(x))
         x = F.relu(self.conv4(x))
         x = plane_group_spatial_max_pooling(x, 2, 2)
@@ -98,7 +102,11 @@ def train(epoch):
         if batch_idx % args.log_interval == 0:
             print('Train Epoch: {} [{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                 epoch, batch_idx * len(data), len(train_loader.dataset),
+<<<<<<< HEAD
                 100. * batch_idx / len(train_loader), loss.data))
+=======
+                100. * batch_idx / len(train_loader), loss.data[0]))
+>>>>>>> 193b391672b50917ead7e63f509a19f651af5e18
 
 
 def test():
@@ -110,7 +118,11 @@ def test():
             data, target = data.cuda(), target.cuda()
         data, target = Variable(data, volatile=True), Variable(target)
         output = model(data)
+<<<<<<< HEAD
         test_loss += F.nll_loss(output, target, size_average=False).data # sum up batch loss
+=======
+        test_loss += F.nll_loss(output, target, size_average=False).data[0] # sum up batch loss
+>>>>>>> 193b391672b50917ead7e63f509a19f651af5e18
         pred = output.data.max(1, keepdim=True)[1] # get the index of the max log-probability
         correct += pred.eq(target.data.view_as(pred)).cpu().sum()
 
